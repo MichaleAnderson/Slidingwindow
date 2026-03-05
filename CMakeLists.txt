@@ -14,8 +14,9 @@ add_library(DuplicateChecker
 )
 
 # Executable
-add_executable(main_app
+add_executable(slidingwindow
     src/main.cpp
+    src/DuplicateChecker.cpp
 )
 
 # Link library
