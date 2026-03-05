@@ -3,8 +3,6 @@ name: C++ CI Build
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   build:
@@ -13,25 +11,28 @@ jobs:
 
     steps:
 
-    - name: Checkout repository
+    - name: Checkout
       uses: actions/checkout@v3
 
     - name: Setup CMake
       uses: lukka/get-cmake@latest
 
-    - name: Configure Project
+    - name: Configure
       run: |
         mkdir build
         cd build
         cmake ..
 
-    - name: Build Project
+    - name: Build
       run: |
         cd build
         cmake --build . --config Release
 
-    - name: Upload Executable
+    - name: Show build output
+      run: dir build /s
+
+    - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: slidingwindow-exe
-        path: build/Release/*.exe
+        path: build/**/*.exe
