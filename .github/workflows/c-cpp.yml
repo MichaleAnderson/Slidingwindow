@@ -1,10 +1,10 @@
-name: C++ Build Pipeline
+name: C++ CI Build
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   build:
@@ -13,7 +13,7 @@ jobs:
 
     steps:
 
-    - name: Checkout Repository
+    - name: Checkout repository
       uses: actions/checkout@v3
 
     - name: Setup CMake
@@ -23,7 +23,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ../sliding_window_duplicate
+        cmake ..
 
     - name: Build Project
       run: |
@@ -33,5 +33,5 @@ jobs:
     - name: Upload Executable
       uses: actions/upload-artifact@v4
       with:
-        name: SlidingWindowDuplicateExe
-        path: build/Release/main_app.exe
+        name: slidingwindow-exe
+        path: build/Release/*.exe
